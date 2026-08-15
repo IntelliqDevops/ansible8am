@@ -1,0 +1,11 @@
+---
+- name: Install maven on all the servers
+  hosts: all
+  tasks:
+    - name: Install maven
+      apt:
+        name: maven
+        state: present
+        update_cache: yes
+
+...

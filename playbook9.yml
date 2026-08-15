@@ -1,0 +1,10 @@
+---
+- name: Implementing global scope variables
+  hosts: all
+  tasks:
+    - name: Install/uninstall s/w apps
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+

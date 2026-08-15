@@ -1,0 +1,14 @@
+---
+- name: Implementing loops
+  hosts: all
+  tasks:
+    - name: Install,uninstall,upgrade s/w apps
+      apt:
+        name: "{{item.a}}"
+        state: "{{item.b}}"
+        update_cache: "{{item.c}}"
+      loop:
+        - {a: tree,b: present,c: no}
+        - {a: openjdk-21-jdk,b: absent,c: no}
+        - {a: maven,b: latest,c: yes}
+...

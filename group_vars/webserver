@@ -1,0 +1,6 @@
+---
+a: firewalld
+b: present
+c: yes
+
+

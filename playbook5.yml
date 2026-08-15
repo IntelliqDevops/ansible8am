@@ -1,0 +1,14 @@
+---
+- name: Install apache2 and shut down the service
+  hosts: 172.31.16.156
+  tasks:
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+    - name: Stop the apache service
+      service:
+        name: apache2
+        state: stopped
+...
