@@ -1,0 +1,31 @@
+---
+- name: Implementing handlers
+  hosts: all
+  tasks:
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+      notify: Restart apache2
+    - name: Edit the index.html file
+      copy:
+        content: "Weclome to my IntelliQ-IT"
+        dest: /var/www/html/index.html
+      notify: Restart apache2
+  handlers:
+    - name: Restart apache2
+      service:
+        name: apache2
+        state: restarted
+    - name: Check url response
+      uri:
+        url: "{{item}}"
+        status_code: 200
+      loop:
+        - http://172.31.16.156
+        - http://172.31.23.131
+...
+
+
+
