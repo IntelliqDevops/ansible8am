@@ -1,0 +1,16 @@
+---
+- name: Install tree on All the servers
+  hosts: all
+  tasks:
+    - name: Install tree on Ubuntu servers using apt
+      apt:
+        name: tree
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+    - name: Install tree on Redhat servers using yum
+      yum:
+        name: tree
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "RedHat"

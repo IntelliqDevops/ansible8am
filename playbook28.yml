@@ -1,0 +1,44 @@
+---
+- name: Configure apache2/httpd using block and rescue
+  hosts: all
+  tasks:
+    - block:
+        - name: Install apache2 on Ubuntu using apt
+          apt:
+            name: apache2
+            state: present
+            update_cache: yes
+      rescue:
+        - name: Install httpd on Redhat servers
+          yum:
+            name: httpd
+            state: present
+            update_cache: yes
+    - name: Edit the index.html file
+      copy:
+        content: "IntelliQ"
+        dest: /var/www/html/index.html
+    - block:
+        - name: Restart apache2 on Ubuntu servers
+          service:
+            name: apache2
+            state: restarted
+      rescue:
+        - name: Restart httpd on Redhat servers
+          service:
+            name: httpd
+            state: restarted
+    - name: Check apache/httpd response on all the servers
+      uri:
+        url: "{{item}}"
+        status_code: 200
+      loop:
+        - http://172.31.16.156
+        - http://172.31.23.131
+        - http://172.31.24.7
+...
+
+
+
+
+
