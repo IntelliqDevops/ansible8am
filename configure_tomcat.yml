@@ -1,0 +1,13 @@
+---
+- name: Configure tomcat using child playbooks and host scope variables
+  hosts: all
+  tasks:
+    - name: Call multiplem child playbooks
+      include_tasks: "{{item}}"
+      loop:
+        - install_tomcat.yml
+        - copy_tomcat_users.yml
+        - change_port.yml
+        - restart_tomcat.yml
+        - pause.yml
+        - check_tomcat_response.yml

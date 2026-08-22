@@ -1,0 +1,8 @@
+---
+- name: Check tomcat response on port 9090
+  uri:
+    url: "{{item.a}}"
+    status_code: "{{item.b}}"
+  loop:
+    - {a: "{{m}}",b: "{{n}}"}
+    - {a: "{{o}}",b: "{{n}}"}
